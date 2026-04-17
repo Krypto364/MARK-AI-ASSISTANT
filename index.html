@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jarvis AI</title>
+</head>
+<body style="background:black;color:cyan;text-align:center;font-family:Arial">
+
+<h1>JARVIS AI</h1>
+
+<input id="input" placeholder="Ask something..." style="width:300px;height:40px">
+<button onclick="send()">Ask</button>
+
+<p id="response"></p>
+
+<script>
+async function send() {
+  const query = document.getElementById("input").value
+
+  const res = await fetch("http://127.0.0.1:5000/ask", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ query })
+  })
+
+  const data = await res.json()
+  document.getElementById("response").innerText = data.response
+}
+</script>
+
+</body>
+</html>
